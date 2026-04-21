@@ -1,0 +1,1237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Qais Eyad | Information Security Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #080c10;
+  --surface: #0d1117;
+  --surface2: #111820;
+  --border: #1e2d3d;
+  --accent: #00d4ff;
+  --accent2: #ff4d6d;
+  --accent3: #39ff14;
+  --text: #e6edf3;
+  --muted: #8b949e;
+  --card: #0d1f2d;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Syne', sans-serif;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* CUSTOM CURSOR */
+.cursor {
+  width: 12px; height: 12px;
+  background: var(--accent);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transition: transform 0.1s, opacity 0.2s;
+  box-shadow: 0 0 20px var(--accent);
+}
+.cursor-ring {
+  width: 36px; height: 36px;
+  border: 1px solid var(--accent);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9998;
+  transition: transform 0.15s ease, width 0.2s, height 0.2s;
+  opacity: 0.5;
+}
+
+/* GRID BACKGROUND */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0,212,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,212,255,0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* NAV */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 60px;
+  background: rgba(8,12,16,0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo {
+  font-family: 'Space Mono', monospace;
+  font-size: 1.1rem;
+  color: var(--accent);
+  letter-spacing: 2px;
+}
+.nav-links {
+  display: flex;
+  gap: 40px;
+  list-style: none;
+}
+.nav-links a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--accent); }
+
+/* SECTIONS */
+section {
+  position: relative;
+  z-index: 1;
+  padding: 120px 60px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* HERO */
+#hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 100px;
+  max-width: 100%;
+  padding-left: 100px;
+  padding-right: 100px;
+}
+.hero-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--accent);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.hero-tag::before {
+  content: '';
+  width: 40px;
+  height: 1px;
+  background: var(--accent);
+}
+.hero-name {
+  font-size: clamp(3.5rem, 8vw, 8rem);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -3px;
+  margin-bottom: 16px;
+}
+.hero-name span {
+  color: var(--accent);
+  display: block;
+}
+.hero-title {
+  font-family: 'Space Mono', monospace;
+  font-size: 1rem;
+  color: var(--muted);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 40px;
+}
+.hero-desc {
+  max-width: 560px;
+  font-size: 1.1rem;
+  color: var(--muted);
+  line-height: 1.8;
+  margin-bottom: 50px;
+  font-weight: 400;
+}
+.hero-desc strong { color: var(--text); }
+.hero-btns {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.btn-primary {
+  padding: 16px 40px;
+  background: var(--accent);
+  color: var(--bg);
+  font-family: 'Space Mono', monospace;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-weight: 700;
+  transition: all 0.2s;
+  clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+}
+.btn-primary:hover {
+  background: var(--bg);
+  color: var(--accent);
+  box-shadow: inset 0 0 0 1px var(--accent);
+}
+.btn-outline {
+  padding: 16px 40px;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  font-family: 'Space Mono', monospace;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+.hero-status {
+  position: absolute;
+  right: 100px;
+  bottom: 80px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--muted);
+  letter-spacing: 2px;
+}
+.status-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--accent3);
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(57,255,20,0.4); }
+  50% { opacity: 0.7; box-shadow: 0 0 0 8px rgba(57,255,20,0); }
+}
+
+/* SECTION LABELS */
+.section-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--accent);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+  max-width: 200px;
+}
+.section-title {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 800;
+  letter-spacing: -2px;
+  line-height: 1;
+  margin-bottom: 60px;
+}
+.section-title em {
+  font-style: normal;
+  color: var(--accent);
+}
+
+/* ABOUT */
+#about .about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+.about-text p {
+  color: var(--muted);
+  line-height: 1.9;
+  font-size: 1rem;
+  margin-bottom: 20px;
+}
+.about-text p strong { color: var(--text); }
+.about-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+}
+.stat-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 30px;
+  transition: border-color 0.2s;
+}
+.stat-card:hover { border-color: var(--accent); }
+.stat-num {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.stat-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--muted);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* TECH STACK */
+#techstack {
+  background: var(--surface);
+  max-width: 100%;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+#techstack > div {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 80px 60px;
+}
+.tech-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 2px;
+}
+.tech-item {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: all 0.2s;
+  cursor: default;
+}
+.tech-item:hover {
+  border-color: var(--accent);
+  background: var(--card);
+  transform: translateY(-2px);
+}
+.tech-cat {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.6rem;
+  color: var(--accent);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.tech-name {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+/* EXPERIENCE */
+.exp-item {
+  border-left: 1px solid var(--border);
+  padding-left: 40px;
+  margin-bottom: 60px;
+  position: relative;
+  transition: border-color 0.2s;
+}
+.exp-item:hover { border-color: var(--accent); }
+.exp-item::before {
+  content: '';
+  position: absolute;
+  left: -5px; top: 8px;
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 12px var(--accent);
+}
+.exp-period {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--accent);
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+}
+.exp-role {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.exp-company {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+}
+.exp-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.exp-list li {
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.7;
+  padding-left: 20px;
+  position: relative;
+}
+.exp-list li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+}
+
+/* CERTIFICATIONS */
+.cert-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2px;
+}
+.cert-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 32px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s;
+  clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px));
+}
+.cert-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 2px;
+  background: linear-gradient(90deg, var(--accent), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.cert-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+.cert-card:hover::before { opacity: 1; }
+.cert-badge {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--accent2);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.cert-badge::before { content: '⬡'; font-size: 1rem; }
+.cert-name {
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.4;
+  margin-bottom: 8px;
+}
+.cert-issuer {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--muted);
+  letter-spacing: 1px;
+}
+
+/* ACHIEVEMENTS */
+.achievement-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 2px;
+}
+.ach-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 32px;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+.ach-card:hover { border-color: var(--accent); }
+.ach-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; right: 0;
+  width: 80px; height: 80px;
+  background: radial-gradient(circle, rgba(0,212,255,0.05), transparent);
+}
+/* ACHIEVEMENT IMAGE STYLES */
+.ach-img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  display: block;
+  border: 1px solid var(--border);
+  transition: border-color 0.3s;
+}
+.ach-card:hover .ach-img { border-color: var(--accent); }
+.ach-img-placeholder {
+  width: 100%;
+  height: 200px;
+  background: var(--card);
+  border: 2px dashed var(--border);
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+.placeholder-icon { font-size: 2rem; margin-bottom: 8px; opacity: 0.3; }
+.placeholder-text {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--muted);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 0 20px;
+}
+.ach-rank {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.ach-event {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--accent2);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.ach-desc {
+  font-size: 0.9rem;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+/* CONTENT & TEACHING */
+.content-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+}
+.content-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 48px;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+.content-card:hover { border-color: var(--accent); }
+.content-card.coming-soon {
+  border-color: var(--border);
+  opacity: 0.8;
+}
+.content-icon {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  display: block;
+}
+.content-platform {
+  font-size: 1.4rem;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+.content-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--accent3);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  display: inline-block;
+  padding: 4px 10px;
+  border: 1px solid rgba(57,255,20,0.3);
+}
+.content-tag.soon {
+  color: var(--accent2);
+  border-color: rgba(255,77,109,0.3);
+}
+.content-desc {
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.8;
+  margin-bottom: 24px;
+}
+.content-link {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--accent);
+  text-decoration: none;
+  letter-spacing: 2px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: gap 0.2s;
+}
+.content-link:hover { gap: 16px; }
+.content-link::after { content: '→'; }
+
+/* SERVICES */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+}
+.service-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 40px 32px;
+  transition: all 0.3s;
+  position: relative;
+}
+.service-card:hover {
+  border-color: var(--accent);
+  background: var(--card);
+}
+.service-num {
+  font-family: 'Space Mono', monospace;
+  font-size: 3rem;
+  font-weight: 700;
+  color: rgba(0,212,255,0.1);
+  line-height: 1;
+  margin-bottom: 20px;
+  transition: color 0.3s;
+}
+.service-card:hover .service-num { color: rgba(0,212,255,0.25); }
+.service-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+.service-desc {
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+
+/* COMMUNITY */
+#community {
+  background: linear-gradient(135deg, rgba(0,212,255,0.05), rgba(255,77,109,0.03));
+  border: 1px solid var(--border);
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+.community-inner {
+  max-width: 600px;
+  margin: 0 auto;
+}
+.community-icon { font-size: 4rem; margin-bottom: 24px; display: block; }
+.community-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 16px;
+  letter-spacing: -2px;
+}
+.community-desc {
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.8;
+  margin-bottom: 40px;
+}
+.discord-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 48px;
+  background: #5865F2;
+  color: white;
+  text-decoration: none;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  font-weight: 700;
+  transition: all 0.2s;
+  clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+}
+.discord-btn:hover { background: #4752c4; transform: translateY(-2px); box-shadow: 0 10px 30px rgba(88,101,242,0.4); }
+.whatsapp-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 48px;
+  background: #25D366;
+  color: white;
+  text-decoration: none;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  font-weight: 700;
+  transition: all 0.2s;
+  clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+}
+.whatsapp-btn:hover { background: #1ebe5d; transform: translateY(-2px); box-shadow: 0 10px 30px rgba(37,211,102,0.4); }
+.community-btns {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.whatsapp-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 48px;
+  background: #25D366;
+  color: white;
+  text-decoration: none;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  font-weight: 700;
+  transition: all 0.2s;
+  clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+}
+.whatsapp-btn:hover { background: #1ebe5d; transform: translateY(-2px); box-shadow: 0 10px 30px rgba(37,211,102,0.4); }
+.community-btns {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* FOOTER */
+footer {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  padding: 40px 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer-logo {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.9rem;
+  color: var(--accent);
+}
+.footer-copy {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--muted);
+  letter-spacing: 2px;
+}
+.footer-links {
+  display: flex;
+  gap: 24px;
+}
+.footer-links a {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--muted);
+  text-decoration: none;
+  letter-spacing: 1px;
+  transition: color 0.2s;
+}
+.footer-links a:hover { color: var(--accent); }
+
+/* ANIMATIONS */
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* SCROLLBAR */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  nav { padding: 20px 30px; }
+  .nav-links { display: none; }
+  #hero { padding: 100px 30px 60px; }
+  section { padding: 80px 30px; }
+  #about .about-grid { grid-template-columns: 1fr; gap: 40px; }
+  .content-grid { grid-template-columns: 1fr; }
+  .services-grid { grid-template-columns: 1fr; }
+  footer { flex-direction: column; gap: 20px; text-align: center; padding: 40px 30px; }
+  .hero-status { position: static; margin-top: 40px; }
+  #techstack > div { padding: 80px 30px; }
+  #community { margin: 0 30px; }
+}
+
+/* TERMINAL BLINK */
+.blink {
+  animation: blink 1s step-end infinite;
+}
+@keyframes blink { 50% { opacity: 0; } }
+
+/* HIGHLIGHT LINE */
+.highlight-line {
+  display: inline;
+  background: linear-gradient(transparent 60%, rgba(0,212,255,0.2) 60%);
+}
+</style>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">QE_SECURITY</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#certifications">Certs</a></li>
+    <li><a href="#achievements">Achievements</a></li>
+    <li><a href="#content">Content</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#community">Community</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-tag">Information Security Engineer</div>
+  <h1 class="hero-name">
+    Qais<br>
+    <span>Eyad.</span>
+  </h1>
+  <p class="hero-title">SOC Analyst &nbsp;·&nbsp; DFIR Specialist &nbsp;·&nbsp; Security Educator</p>
+  <p class="hero-desc">
+    Defending networks by day. Building the next generation of defenders by night.
+    <strong> Threat detection, incident response, and knowledge transfer</strong> — this is what I do.
+  </p>
+  <div class="hero-btns">
+    <a href="#experience" class="btn-primary">View Experience</a>
+    <a href="#community" class="btn-outline">Join Community</a>
+  </div>
+  <div class="hero-status">
+    <span class="status-dot"></span>
+    <span>Available for Consulting & Training</span>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">// 01 — About</div>
+  <h2 class="section-title">The Analyst<br>Behind the <em>Terminal.</em></h2>
+  <div class="about-grid fade-in">
+    <div class="about-text">
+      <p>
+        I'm <strong>Qais Eyad</strong>, an Information Security Engineer based in Amman, Jordan, with deep hands-on experience in <strong>Security Operations Center (SOC)</strong> analysis, <strong>Digital Forensics & Incident Response (DFIR)</strong>, and Blue Team operations.
+      </p>
+      <p>
+        My work centers on one mission: detect threats before they escalate. I analyze logs across network, endpoint, and server layers, hunt for Indicators of Compromise (IOCs), and respond to incidents using SIEM platforms like <strong>QRadar and Splunk</strong>, SOAR automation, and EDR tooling.
+      </p>
+      <p>
+        Beyond the SOC, I'm passionate about <strong>knowledge transfer</strong>. I teach, mentor, and create content that empowers the next wave of cybersecurity professionals — through YouTube labs, university events, and live security sessions.
+      </p>
+      <p>
+        I hold a B.Sc. in Cyber Security from <strong>Hashemite University (2025)</strong>, where I graduated with a Very Good GPA and led multiple award-winning projects in malware analysis and DFIR.
+      </p>
+    </div>
+    <div class="about-stats">
+      <div class="stat-card">
+        <div class="stat-num">3+</div>
+        <div class="stat-label">Years in Cybersecurity</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">6+</div>
+        <div class="stat-label">Certifications Earned</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">10+</div>
+        <div class="stat-label">CTF Competitions</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">∞</div>
+        <div class="stat-label">Logs Analyzed</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TECH STACK -->
+<div id="techstack">
+<div>
+  <div class="section-label" style="max-width:1200px; margin: 0 auto 40px;">// Tech Stack</div>
+  <div class="tech-grid fade-in">
+    <div class="tech-item">
+      <span class="tech-cat">SIEM</span>
+      <span class="tech-name">IBM QRadar</span>
+    </div>
+    <div class="tech-item">
+      <span class="tech-cat">SIEM</span>
+      <span class="tech-name">Splunk</span>
+    </div>
+    <div class="tech-item">
+      <span class="tech-cat">Endpoint</span>
+      <span class="tech-name">EDR Analysis</span>
+    </div>
+    <div class="tech-item">
+      <span class="tech-cat">Automation</span>
+      <span class="tech-name">SOAR Platforms</span>
+    </div>
+    <div class="tech-item">
+      <span class="tech-cat">OS</span>
+      <span class="tech-name">Linux Administration</span>
+    </div>
+    <div class="tech-item">
+      <span class="tech-cat">Network</span>
+      <span class="tech-name">IDS / IPS</span>
+    </div>
+    <div class="tech-item">
+      <span class="tech-cat">Forensics</span>
+      <span class="tech-name">DFIR Tools</span>
+    </div>
+    <div class="tech-item">
+      <span class="tech-cat">Cloud</span>
+      <span class="tech-name">DevSecOps / Docker</span>
+    </div>
+    <div class="tech-item">
+      <span class="tech-cat">Compliance</span>
+      <span class="tech-name">ISO 27001 / PDPL</span>
+    </div>
+    <div class="tech-item">
+      <span class="tech-cat">Offensive</span>
+      <span class="tech-name">Penetration Testing</span>
+    </div>
+    <div class="tech-item">
+      <span class="tech-cat">Network</span>
+      <span class="tech-name">Firewalls & Protocols</span>
+    </div>
+    <div class="tech-item">
+      <span class="tech-cat">Analysis</span>
+      <span class="tech-name">Malware Analysis</span>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-label">// 02 — Experience</div>
+  <h2 class="section-title">Where I've <em>Operated.</em></h2>
+
+  <div class="fade-in">
+    <div class="exp-item">
+      <div class="exp-period">Aug 2025 — Present</div>
+      <div class="exp-role">Information Security Analyst</div>
+      <div class="exp-company">SMT Group &nbsp;·&nbsp; SOC Operations</div>
+      <ul class="exp-list">
+        <li>Perform multi-source log analysis across network, endpoint, and server layers to surface Indicators of Compromise (IOCs) before they escalate.</li>
+        <li>Operate SIEM platforms (QRadar) in real time to detect, triage, and respond to active threat events across the enterprise.</li>
+        <li>Drive down Mean Time to Respond (MTTR) by engineering automated incident response workflows via SOAR platforms.</li>
+        <li>Investigate EDR alerts for suspicious process behavior, privilege escalation attempts, and lateral movement — performing deep endpoint-level forensics.</li>
+        <li>Manage the full security incident lifecycle as a core member of the SOC team, from detection through post-incident reporting.</li>
+      </ul>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-period">Jan 2025 — Jul 2025</div>
+      <div class="exp-role">Information Security Engineer Intern</div>
+      <div class="exp-company">GN TEQ &nbsp;·&nbsp; DevSecOps & Cloud Security</div>
+      <ul class="exp-list">
+        <li>Hardened DevOps pipelines and containerized environments, reducing Docker image attack surface through systematic vulnerability scanning.</li>
+        <li>Conducted penetration tests across production systems, identifying and remediating critical vulnerabilities before they could be exploited.</li>
+        <li>Secured cloud environments by applying Zero Trust principles and enforcing least-privilege access across containerized workloads.</li>
+        <li>Designed and delivered security awareness training programs, measurably improving employee threat recognition across the organization.</li>
+      </ul>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-period">Sep 2024 — Jan 2025</div>
+      <div class="exp-role">Cybersecurity & Data Privacy Associate</div>
+      <div class="exp-company">AIM &nbsp;·&nbsp; Compliance & Data Protection</div>
+      <ul class="exp-list">
+        <li>Ensured client compliance with the Personal Data Protection Law (PDPL) and ISO 27001 standards across multiple industry verticals.</li>
+        <li>Provided expert guidance on data protection clauses in legal contracts and business agreements, mitigating organizational risk exposure.</li>
+        <li>Translated complex regulatory requirements into actionable security controls for client organizations.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <div class="section-label">// 03 — Certifications</div>
+  <h2 class="section-title">Credentials That <em>Matter.</em></h2>
+  <div class="cert-grid fade-in">
+    <div class="cert-card">
+      <div class="cert-badge">EC-Council &nbsp;·&nbsp; Mar 2026</div>
+      <div class="cert-name">Certified SOC Analyst (CSA)</div>
+      <div class="cert-issuer">EC-Council</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-badge">Pentester Academy &nbsp;·&nbsp; Apr 2025</div>
+      <div class="cert-name">Certified Red Team Analyst (CRTA)</div>
+      <div class="cert-issuer">Pentester Academy</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-badge">Fortinet &nbsp;·&nbsp; Aug 2024</div>
+      <div class="cert-name">Fortinet Certified Fundamentals (FCF)</div>
+      <div class="cert-issuer">Fortinet</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-badge">EC-Council &nbsp;·&nbsp; Feb 2024</div>
+      <div class="cert-name">Digital Forensics Essentials (DFE)</div>
+      <div class="cert-issuer">EC-Council</div>
+    </div>
+    
+	
+    <div class="cert-card">
+      <div class="cert-badge">TryHackMe</div>
+      <div class="cert-name">SOC Level 1 (SOC101)</div>
+      <div class="cert-issuer">TryHackMe</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-badge">Cisco &nbsp;·&nbsp; Aug 2022</div>
+      <div class="cert-name">Cisco Certified Network Associate (CCNA)</div>
+      <div class="cert-issuer">Cisco</div>
+    </div>
+  </div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section id="achievements">
+  <div class="section-label">// 04 — Achievements</div>
+  <h2 class="section-title">Battles <em>Won.</em></h2>
+
+  <div class="achievement-grid fade-in">
+
+    <div class="ach-card">
+      <img class="ach-img" src="ncsc2025.jpg" alt="NCSC 2025" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="ach-img-placeholder" style="display:none"><span class="placeholder-icon">📷</span><span class="placeholder-text">ncsc2025.jpg not found</span></div>
+      <div class="ach-rank">Top 10</div>
+      <div class="ach-event">NCSC 2025</div>
+      <p class="ach-desc">Qualified for the Top 10 in the National Cyber Security Center competition 2025 — a testament to elite-level threat analysis and CTF problem-solving under pressure.</p>
+    </div>
+
+    <div class="ach-card">
+      <img class="ach-img" src="falcon_project.jpg" alt="Falcon Network Analyzer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="ach-img-placeholder" style="display:none"><span class="placeholder-icon">📷</span><span class="placeholder-text">falcon_project.jpg not found</span></div>
+      <div class="ach-rank">🎓</div>
+      <div class="ach-event">Graduation Project</div>
+      <p class="ach-desc"><strong>Falcon Network Analyzer: Threat Detection Using AI</strong> — Engineered an AI-powered network analyzer capable of detecting real-time threats through intelligent traffic analysis.</p>
+    </div>
+
+    <div class="ach-card">
+      <img class="ach-img" src="blackhat_mea.jpg" alt="BlackHat MEA CTF 2024" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="ach-img-placeholder" style="display:none"><span class="placeholder-icon">📷</span><span class="placeholder-text">blackhat_mea.jpg not found</span></div>
+      <div class="ach-rank">#54</div>
+      <div class="ach-event">BlackHat MEA CTF 2024</div>
+      <p class="ach-desc">Qualified for the Final Round of BlackHat MEA CTF 2024 — one of the most prestigious cybersecurity competitions in the Middle East & Africa region, finishing ranked 54 globally.</p>
+    </div>
+
+    <div class="ach-card">
+      <img class="ach-img" src="dot_summit.jpg" alt="DOT Cyber Summit" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="ach-img-placeholder" style="display:none"><span class="placeholder-icon">📷</span><span class="placeholder-text">dot_summit.jpg not found</span></div>
+      <div class="ach-rank">🏆</div>
+      <div class="ach-event">DOT Cyber Summit — NCSCJO</div>
+      <p class="ach-desc">Presented the <strong>Malware Analysis Framework</strong> project at the Dot Cyber Summit by NCSCJO. Honored with a live interview on <strong>AlMamlaka TV (قناة المملكة)</strong> — speaking on the role of national cybersecurity centers.</p>
+    </div>
+
+   
+
+    <div class="ach-card">
+      <img class="ach-img" src="ncsc_ctf.jpg" alt="NCSC Final CTF" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="ach-img-placeholder" style="display:none"><span class="placeholder-icon">📷</span><span class="placeholder-text">ncsc_ctf.jpg not found</span></div>
+      <div class="ach-rank">5th</div>
+      <div class="ach-event">NCSC Final CTF</div>
+      <p class="ach-desc">Achieved <strong>5th place</strong> in the NCSC Final CTF — after securing 2nd place in the pre-final round with team <strong>Cyber-eto</strong>. A consistent top-5 performer on the national stage.</p>
+    </div>
+
+    <div class="ach-card">
+      <img class="ach-img" src="itsaf_petra.jpg" alt="ITSAF Competition University of Petra" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="ach-img-placeholder" style="display:none"><span class="placeholder-icon">📷</span><span class="placeholder-text">itsaf_petra.jpg not found</span></div>
+      <div class="ach-rank">🥇</div>
+      <div class="ach-event">ITSAF Competition — University of Petra</div>
+      <p class="ach-desc">Advanced to the finals with project <strong>"Advanced Analysis and Digital Forensics to Enhance Malware Detection"</strong> at University of Petra's ITSAF competition.</p>
+    </div>
+
+    <div class="ach-card">
+      <img class="ach-img" src="security_day.jpg" alt="RLCTF Finals and Security Day" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="ach-img-placeholder" style="display:none"><span class="placeholder-icon">📷</span><span class="placeholder-text">security_day.jpg not found</span></div>
+      <div class="ach-rank">4th</div>
+      <div class="ach-event">RLCTF Finals — JUST & Security Day</div>
+      <p class="ach-desc">Achieved 4th place in the RLCTF Finals at JUST. Also conducted a live DFIR scenario at Security Day — honored by the presence of the Dean of the College of Technology, Hashemite University.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTENT & TEACHING -->
+<section id="content">
+  <div class="section-label">// 05 — Content & Teaching</div>
+  <h2 class="section-title">Building the<br><em>Next Generation.</em></h2>
+  <div class="content-grid fade-in">
+    <div class="content-card">
+      <span class="content-icon">▶</span>
+      <div class="content-platform">YouTube</div>
+      <span class="content-tag">Live Now</span>
+      <p class="content-desc">
+        My YouTube channel is a hands-on learning lab. I focus on building real-world <strong>SOC Home Labs</strong>, detecting attacks in real time, <strong>Blue Team defense scenarios</strong>, and DFIR walkthroughs that go beyond theory — straight into the terminal.
+      </p>
+      <a href="https://www.youtube.com/@Qais_Eyad" target="_blank" class="content-link">Visit Channel</a>
+    </div>
+    <div class="content-card coming-soon">
+      <span class="content-icon">🎓</span>
+      <div class="content-platform">Udemy</div>
+      <span class="content-tag soon">Coming Soon</span>
+      <p class="content-desc">
+        Professional-grade cybersecurity courses are currently in development. Expect structured, lab-heavy content covering SOC operations, DFIR methodologies, threat hunting, and Blue Team techniques — built for practitioners, not just beginners.
+      </p>
+      <a href="#community" class="content-link">Get Notified via Discord</a>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-label">// 06 — Services</div>
+  <h2 class="section-title">What I Can<br><em>Do For You.</em></h2>
+  <div class="services-grid fade-in">
+    <div class="service-card">
+      <div class="service-num">01</div>
+      <div class="service-title">SOC Home Lab Build</div>
+      <p class="service-desc">End-to-end design and deployment of your personal SOC environment — SIEM setup, log ingestion, detection rules, and alert tuning. Built to simulate real enterprise conditions.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-num">02</div>
+      <div class="service-title">Security Consulting</div>
+      <p class="service-desc">Threat modeling, security posture assessments, and DFIR advisory for individuals and small organizations. Practical recommendations, zero fluff.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-num">03</div>
+      <div class="service-title">1-on-1 Technical Training</div>
+      <p class="service-desc">Private sessions tailored to your level — whether you're breaking into cybersecurity or leveling up your Blue Team skills. DFIR, SOC operations, threat hunting, and more.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-num">04</div>
+      <div class="service-title">Cybersecurity Projects</div>
+      <p class="service-desc">Collaborative development of security tools, malware analysis frameworks, and detection systems. Academic and professional projects welcome.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-num">05</div>
+      <div class="service-title">Security Awareness Training</div>
+      <p class="service-desc">Designing and delivering corporate security awareness programs — transforming employees from security liabilities into your first line of defense.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-num">06</div>
+      <div class="service-title">CTF Coaching & Mentoring</div>
+      <p class="service-desc">Guided CTF preparation and team coaching for students and professionals targeting national and international competitions.</p>
+    </div>
+  </div>
+</section>
+
+<!-- COMMUNITY -->
+<section id="community">
+  <div class="community-inner fade-in">
+    <span class="community-icon">⚡</span>
+    <h2 class="community-title">Join the <em style="color:var(--accent)">Community.</em></h2>
+    <p class="community-desc">
+      A growing Discord community of cybersecurity enthusiasts, analysts, and learners. Share tools, discuss techniques, get feedback on your CTF writeups, and connect with defenders who speak your language.
+    </p>
+    <div class="community-btns">
+    <a href="https://discord.com/invite/KKXyRwbq94" target="_blank" class="discord-btn">
+      <svg width="20" height="16" viewBox="0 0 20 16" fill="white"><path d="M16.93 1.33A16.1 16.1 0 0 0 13.06 0c-.17.32-.37.75-.51 1.09a15.07 15.07 0 0 0-4.57 0C7.82.75 7.61.32 7.44 0A16.08 16.08 0 0 0 3.56 1.33C.51 5.85-.31 10.25.1 14.59a16.26 16.26 0 0 0 5 2.59 12.3 12.3 0 0 0 1.04-1.72c-.57-.22-1.12-.49-1.63-.81l.41-.32a11.5 11.5 0 0 0 10.16 0l.41.32c-.52.32-1.07.59-1.64.81.3.61.64 1.19 1.04 1.72a16.2 16.2 0 0 0 5.01-2.59c.46-4.93-.79-9.28-3.37-13.26ZM6.68 11.97c-.98 0-1.79-.92-1.79-2.05s.79-2.06 1.79-2.06c1 0 1.8.92 1.79 2.06 0 1.13-.79 2.05-1.79 2.05Zm6.64 0c-.99 0-1.79-.92-1.79-2.05s.79-2.06 1.79-2.06c1 0 1.8.92 1.79 2.06 0 1.13-.78 2.05-1.79 2.05Z"/></svg>
+      Join Discord Server
+    </a>
+    <a href="https://chat.whatsapp.com/FtsyHXh8pLW1TLMzGcPEUI" target="_blank" class="whatsapp-btn">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+      WhatsApp Community
+    </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">QE_SECURITY</div>
+  <div class="footer-copy">© 2026 · Qais Eyad · Amman, Jordan</div>
+  <div class="footer-links">
+    <a href="https://www.linkedin.com/in/qais-eyad" target="_blank">LinkedIn</a>
+    <a href="https://www.youtube.com/@Qais_Eyad" target="_blank">YouTube</a>
+    <a href="https://discord.com/invite/KKXyRwbq94" target="_blank">Discord</a>
+    <a href="mailto:qays4738@gmail.com">Email</a>
+  </div>
+</footer>
+
+<script>
+// Custom cursor
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+let mx = 0, my = 0, rx = 0, ry = 0;
+
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  cursor.style.left = mx - 6 + 'px';
+  cursor.style.top = my - 6 + 'px';
+});
+
+function animRing() {
+  rx += (mx - rx) * 0.12;
+  ry += (my - ry) * 0.12;
+  ring.style.left = rx - 18 + 'px';
+  ring.style.top = ry - 18 + 'px';
+  requestAnimationFrame(animRing);
+}
+animRing();
+
+document.querySelectorAll('a, button').forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    cursor.style.transform = 'scale(2)';
+    ring.style.width = '60px'; ring.style.height = '60px';
+    ring.style.marginLeft = '-12px'; ring.style.marginTop = '-12px';
+  });
+  el.addEventListener('mouseleave', () => {
+    cursor.style.transform = 'scale(1)';
+    ring.style.width = '36px'; ring.style.height = '36px';
+    ring.style.marginLeft = '0'; ring.style.marginTop = '0';
+  });
+});
+
+// Scroll fade-in
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+
+// Nav highlight on scroll
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', () => {
+  let cur = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 200) cur = s.id; });
+  navLinks.forEach(a => {
+    a.style.color = a.getAttribute('href') === '#' + cur ? 'var(--accent)' : '';
+  });
+});
+</script>
+</body>
+</html>
