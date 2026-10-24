@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Qais Eyad | IT Security Officer, SOC &amp; DFIR</title>
+<meta name="description" content="Qais Eyad is an IT Security Officer in Amman, Jordan, working in SOC operations and DFIR. Free and paid cybersecurity courses, private certification training, and security consulting.">
+<meta property="og:title" content="Qais Eyad | SOC &amp; DFIR">
+<meta property="og:description" content="Courses, private training and consulting in SOC operations and digital forensics.">
+<meta property="og:image" content="bsides_stage.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2313233A'/%3E%3Ctext x='32' y='42' font-family='Arial' font-weight='700' font-size='26' fill='%23F2F4F6' text-anchor='middle'%3EQE%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #F2F4F6;
+  --surface: #FFFFFF;
+  --ink: #13233A;
+  --ink-2: #2B3A52;
+  --muted: #56627A;
+  --line: #D6DCE4;
+  --green: #0B6B4E;
+  --green-soft: #E2F1EB;
+  --amber: #8F5800;
+  --amber-soft: #FFF1D2;
+  --wa: #128C7E;
+
+  --display: 'Archivo', 'IBM Plex Sans Arabic', system-ui, sans-serif;
+  --text: 'IBM Plex Sans', 'IBM Plex Sans Arabic', system-ui, sans-serif;
+
+  --wrap: 1180px;
+  --gutter: clamp(16px, 4vw, 40px);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 84px; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--text);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+html[lang="ar"] body { font-family: 'IBM Plex Sans Arabic', 'IBM Plex Sans', system-ui, sans-serif; line-height: 1.8; }
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+button { font: inherit; color: inherit; }
+h1, h2, h3, p, ul, ol, dl, dd, figure { margin: 0; }
+ul, ol { padding: 0; list-style: none; }
+
+/* language switching */
+html[lang="en"] .ar, html[lang="ar"] .en { display: none !important; }
+
+:focus-visible { outline: 3px solid var(--green); outline-offset: 3px; border-radius: 4px; }
+
+.wrap { max-width: var(--wrap); margin-inline: auto; padding-inline: var(--gutter); }
+
+/* ---------- header ---------- */
+.top {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(242, 244, 246, 0.92);
+  backdrop-filter: saturate(1.4) blur(12px);
+  border-bottom: 1px solid var(--line);
+}
+.top .wrap { display: flex; align-items: center; gap: 24px; height: 68px; }
+.brand {
+  font-family: var(--display); font-weight: 800; font-stretch: 112%;
+  font-size: 1.15rem; text-decoration: none; letter-spacing: -0.01em; white-space: nowrap;
+}
+html[lang="ar"] .brand { letter-spacing: 0; }
+.nav { display: flex; gap: 22px; margin-inline-start: auto; }
+.nav a { text-decoration: none; font-size: 0.95rem; color: var(--ink-2); padding: 6px 0; border-bottom: 2px solid transparent; }
+.nav a:hover { border-color: var(--ink); }
+.top-actions { display: flex; align-items: center; gap: 10px; }
+.lang {
+  border: 1px solid var(--ink); background: transparent; border-radius: 999px;
+  padding: 6px 14px; font-size: 0.9rem; cursor: pointer; font-weight: 500;
+}
+.lang:hover { background: var(--ink); color: var(--paper); }
+.menu-btn { display: none; border: 1px solid var(--line); background: var(--surface); border-radius: 8px; padding: 6px 12px; cursor: pointer; }
+
+/* ---------- buttons ---------- */
+.btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 13px 22px; border-radius: 8px; text-decoration: none;
+  font-weight: 600; font-size: 0.98rem; border: 1px solid transparent; cursor: pointer;
+  transition: background-color .15s, color .15s, border-color .15s;
+}
+.btn-ink { background: var(--ink); color: var(--paper); }
+.btn-ink:hover { background: var(--ink-2); }
+.btn-line { border-color: var(--ink); color: var(--ink); background: transparent; }
+.btn-line:hover { background: var(--surface); }
+.btn-wa { background: var(--wa); color: #fff; }
+.btn-wa:hover { background: #0e7368; }
+.btn svg { flex-shrink: 0; }
+
+/* ---------- hero ---------- */
+.hero { padding-block: clamp(48px, 8vw, 104px) clamp(40px, 6vw, 72px); border-bottom: 1px solid var(--line); }
+.hero-grid { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: clamp(32px, 5vw, 72px); align-items: end; }
+.hero-name {
+  font-family: var(--display); font-weight: 850; font-stretch: 125%;
+  font-size: clamp(3.4rem, 10.5vw, 8.6rem); line-height: 0.86; letter-spacing: -0.035em;
+  margin-bottom: 28px;
+}
+html[lang="ar"] .hero-name { font-family: 'IBM Plex Sans Arabic', sans-serif; font-weight: 700; letter-spacing: 0; line-height: 1.05; font-size: clamp(3.2rem, 10vw, 7.6rem); }
+.hero-lede { font-size: clamp(1.1rem, 1.6vw, 1.3rem); max-width: 34em; color: var(--ink-2); margin-bottom: 32px; }
+.hero-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 36px; }
+.socials { display: flex; flex-wrap: wrap; gap: 8px; }
+.socials a {
+  display: inline-flex; align-items: center; gap: 8px; text-decoration: none;
+  font-size: 0.9rem; padding: 7px 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface);
+}
+.socials a:hover { border-color: var(--ink); }
+.socials svg { width: 16px; height: 16px; fill: var(--ink); }
+
+.now { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 8px 24px; }
+.now div { display: grid; grid-template-columns: 7.5rem 1fr; gap: 12px; padding: 16px 0; border-bottom: 1px solid var(--line); }
+.now div:last-child { border-bottom: 0; }
+.now dt { color: var(--muted); font-size: 0.9rem; padding-top: 2px; }
+.now dd { font-weight: 500; }
+.now dd a { text-decoration-color: var(--line); text-underline-offset: 4px; }
+.now dd a:hover { text-decoration-color: var(--ink); }
+.now .pulse { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--green); margin-inline-end: 8px; vertical-align: 2px; box-shadow: 0 0 0 4px var(--green-soft); }
+
+/* ---------- sections ---------- */
+.section { padding-block: clamp(64px, 9vw, 112px); border-bottom: 1px solid var(--line); }
+.section.alt { background: var(--surface); }
+.head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px 64px; align-items: end; margin-bottom: clamp(32px, 5vw, 56px); }
+.head h2 {
+  font-family: var(--display); font-weight: 800; font-stretch: 110%;
+  font-size: clamp(2rem, 4.4vw, 3.4rem); line-height: 1; letter-spacing: -0.025em;
+}
+html[lang="ar"] .head h2 { font-family: 'IBM Plex Sans Arabic', sans-serif; font-weight: 700; letter-spacing: 0; line-height: 1.25; }
+.head p { color: var(--muted); max-width: 36em; }
+
+/* ---------- courses ---------- */
+.filters { display: inline-flex; gap: 4px; padding: 4px; border-radius: 10px; background: var(--surface); border: 1px solid var(--line); margin-bottom: 24px; }
+.section.alt .filters { background: var(--paper); }
+.filters button { border: 0; background: transparent; padding: 8px 16px; border-radius: 7px; cursor: pointer; font-weight: 500; color: var(--muted); }
+.filters button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+.catalog { border-top: 2px solid var(--ink); }
+.course {
+  display: grid; grid-template-columns: 6.5rem minmax(0, 1.2fr) minmax(0, 1.6fr) auto; gap: 8px 28px;
+  align-items: center; padding: 26px 0; border-bottom: 1px solid var(--line);
+}
+.course[hidden] { display: none; }
+.kind { justify-self: start; font-size: 0.82rem; font-weight: 600; padding: 4px 10px; border-radius: 6px; }
+.kind.free { background: var(--green-soft); color: var(--green); }
+.kind.paid { background: var(--amber-soft); color: var(--amber); }
+.course h3 { font-family: var(--display); font-weight: 750; font-stretch: 108%; font-size: 1.35rem; line-height: 1.15; }
+html[lang="ar"] .course h3 { font-family: 'Archivo', 'IBM Plex Sans Arabic', sans-serif; }
+.course .meta { color: var(--muted); font-size: 0.9rem; margin-top: 4px; }
+.course p { color: var(--ink-2); }
+.course .open { white-space: nowrap; }
+.price { font-family: var(--display); font-weight: 800; font-size: 1.1rem; color: var(--amber); }
+
+/* ---------- roadmaps ---------- */
+.roads { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.road { text-decoration: none; display: block; }
+.road .thumb { position: relative; border-radius: 14px; overflow: hidden; aspect-ratio: 16 / 9; background: var(--ink); }
+.road .thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s ease; }
+.road:hover .thumb img { transform: scale(1.03); }
+.road .play {
+  position: absolute; inset-inline-start: 16px; bottom: 16px;
+  display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 999px;
+  background: rgba(19, 35, 58, 0.88); color: #fff; font-size: 0.9rem; font-weight: 500;
+}
+.road h3 { font-family: var(--display); font-weight: 750; font-stretch: 108%; font-size: 1.35rem; margin-top: 16px; }
+html[lang="ar"] .road h3 { font-family: 'Archivo', 'IBM Plex Sans Arabic', sans-serif; }
+.road p { color: var(--muted); margin-top: 4px; }
+
+/* ---------- training ---------- */
+.train-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+.train {
+  background: var(--surface); text-align: start; border: 0; padding: 26px 24px 24px; cursor: pointer;
+  display: flex; flex-direction: column; gap: 6px; min-height: 190px;
+}
+.section.alt .train { background: var(--paper); }
+.train:hover { background: var(--green-soft); }
+.train .issuer { font-size: 0.85rem; color: var(--muted); }
+.train h3 { font-family: var(--display); font-weight: 750; font-stretch: 108%; font-size: 1.3rem; line-height: 1.15; }
+html[lang="ar"] .train h3 { font-family: 'Archivo', 'IBM Plex Sans Arabic', sans-serif; }
+.train p { color: var(--ink-2); font-size: 0.96rem; }
+.train .more { margin-top: auto; padding-top: 10px; font-weight: 600; font-size: 0.92rem; color: var(--green); }
+.train-note { margin-top: 20px; color: var(--muted); }
+
+/* ---------- consulting ---------- */
+.consult { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(28px, 5vw, 64px); }
+.consult ul li { padding: 20px 0; border-bottom: 1px solid var(--line); }
+.consult ul li:first-child { padding-top: 0; }
+.consult h3 { font-size: 1.12rem; font-weight: 600; margin-bottom: 4px; }
+.consult li p { color: var(--muted); }
+.consult-card { background: var(--ink); color: var(--paper); border-radius: 14px; padding: clamp(24px, 4vw, 40px); align-self: start; }
+.consult-card h3 { font-family: var(--display); font-weight: 800; font-stretch: 110%; font-size: 1.7rem; line-height: 1.15; margin-bottom: 14px; }
+html[lang="ar"] .consult-card h3 { font-family: inherit; }
+.consult-card p { color: #C9D2DF; margin-bottom: 24px; }
+
+/* ---------- experience ---------- */
+.jobs li.job { display: grid; grid-template-columns: 13rem minmax(0, 1fr); gap: 8px 40px; padding: 30px 0; border-bottom: 1px solid var(--line); }
+.jobs li.job:first-child { border-top: 2px solid var(--ink); }
+.when { color: var(--muted); font-size: 0.95rem; }
+.when .tag { display: inline-block; margin-top: 8px; font-size: 0.8rem; font-weight: 600; color: var(--green); background: var(--green-soft); padding: 3px 9px; border-radius: 6px; }
+.job h3 { font-size: 1.3rem; font-weight: 600; line-height: 1.3; }
+.job .org { color: var(--muted); margin-bottom: 12px; }
+.job ul li { position: relative; padding-inline-start: 18px; color: var(--ink-2); margin-top: 6px; }
+.job ul li::before { content: ""; position: absolute; inset-inline-start: 0; top: 0.72em; width: 7px; height: 2px; background: var(--ink); }
+.edu { margin-top: 28px; color: var(--muted); }
+.edu strong { color: var(--ink); font-weight: 600; }
+
+/* ---------- certs ---------- */
+.certs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0 40px; }
+.certs li { padding: 18px 0; border-bottom: 1px solid var(--line); }
+.certs strong { display: block; font-weight: 600; }
+.certs span { color: var(--muted); font-size: 0.93rem; }
+
+/* ---------- achievements ---------- */
+.wins { display: grid; grid-template-columns: repeat(3, 1fr); gap: 36px 24px; }
+.win .duo { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; aspect-ratio: 4 / 3; margin-bottom: 14px; }
+.win .duo img { height: 100%; aspect-ratio: auto; margin: 0; object-position: top; }
+.win img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 12px; background: var(--line); margin-bottom: 14px; }
+.win .result { font-family: var(--display); font-weight: 800; font-stretch: 112%; font-size: 1.5rem; line-height: 1.1; }
+html[lang="ar"] .win .result { font-family: 'Archivo', 'IBM Plex Sans Arabic', sans-serif; }
+.win .event { font-weight: 600; margin: 2px 0 6px; }
+.win p { color: var(--muted); font-size: 0.96rem; }
+
+/* ---------- community / footer ---------- */
+.community { display: grid; grid-template-columns: minmax(0, 1.2fr) auto; gap: 24px 48px; align-items: center; }
+.community h2 { font-family: var(--display); font-weight: 800; font-stretch: 110%; font-size: clamp(1.8rem, 3.6vw, 2.8rem); line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 10px; }
+html[lang="ar"] .community h2 { font-family: inherit; letter-spacing: 0; line-height: 1.3; }
+.community p { color: var(--muted); max-width: 38em; }
+.community-btns { display: flex; flex-wrap: wrap; gap: 12px; }
+.btn-discord { background: #5865F2; color: #fff; }
+.btn-discord:hover { background: #4752c4; }
+
+footer { padding-block: 36px; }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; color: var(--muted); font-size: 0.93rem; }
+footer nav { display: flex; flex-wrap: wrap; gap: 18px; }
+footer a { text-decoration: none; }
+footer a:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 4px; }
+
+/* ---------- dialog ---------- */
+dialog {
+  width: min(640px, calc(100vw - 32px)); max-height: calc(100vh - 48px); border: 0; padding: 0;
+  border-radius: 16px; background: var(--surface); color: var(--ink);
+  box-shadow: 0 30px 80px rgba(19, 35, 58, 0.35);
+}
+dialog::backdrop { background: rgba(19, 35, 58, 0.55); }
+dialog[open] { animation: rise .22s ease-out; }
+@keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+.sheet-close {
+  position: absolute; inset-inline-end: 14px; top: 14px; width: 38px; height: 38px; border-radius: 50%;
+  border: 1px solid var(--line); background: var(--surface); cursor: pointer; font-size: 1.3rem; line-height: 1;
+}
+.sheet-close:hover { border-color: var(--ink); }
+.sheet { padding: 32px clamp(20px, 4vw, 36px) 32px; }
+.sheet .kind { display: inline-block; margin-bottom: 14px; }
+.sheet h3 { font-family: var(--display); font-weight: 800; font-stretch: 110%; font-size: 1.9rem; line-height: 1.1; margin-bottom: 8px; padding-inline-end: 40px; }
+html[lang="ar"] .sheet h3 { font-family: 'Archivo', 'IBM Plex Sans Arabic', sans-serif; }
+.sheet .facts { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 20px; }
+.sheet .facts > span { font-size: 0.88rem; padding: 4px 10px; border-radius: 6px; background: var(--paper); border: 1px solid var(--line); }
+.sheet p { color: var(--ink-2); }
+.sheet p + p { margin-top: 12px; }
+.sheet h4 { font-size: 0.95rem; margin: 24px 0 8px; }
+.sheet ol, .sheet ul.topics { counter-reset: m; }
+.sheet ol li, .sheet ul.topics li { padding: 10px 0; border-bottom: 1px solid var(--line); display: grid; grid-template-columns: 2rem 1fr; }
+.sheet ol li::before { counter-increment: m; content: counter(m); color: var(--green); font-weight: 700; }
+.sheet ul.topics li::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--green); margin-top: 0.62em; }
+.sheet .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; align-items: center; }
+.sheet .price-line { margin-top: 22px; color: var(--ink); }
+.sheet .price-line strong { color: var(--amber); }
+.sheet .fine { color: var(--muted); font-size: 0.88rem; margin-top: 14px; }
+
+/* ---------- responsive ---------- */
+@media (max-width: 1000px) {
+  .nav { display: none; }
+  .top-actions { margin-inline-start: auto; }
+  .menu-btn { display: inline-block; }
+  .nav.open {
+    display: flex; flex-direction: column; gap: 0; position: absolute; top: 68px; inset-inline: 0;
+    background: var(--paper); border-bottom: 1px solid var(--line); padding: 8px var(--gutter) 16px;
+  }
+  .nav.open a { padding: 12px 0; border-bottom: 1px solid var(--line); }
+  .hero-grid, .consult, .head { grid-template-columns: 1fr; }
+  .train-grid, .wins, .certs { grid-template-columns: 1fr 1fr; }
+  .course { grid-template-columns: 6rem minmax(0, 1fr) auto; }
+  .course p { grid-column: 2 / 4; }
+}
+@media (max-width: 680px) {
+  body { font-size: 1rem; }
+  .top-actions .btn-wa span { display: none; }
+  .top-actions .btn-wa { padding: 9px; }
+  .train-grid, .wins, .certs, .roads { grid-template-columns: 1fr; }
+  .course { grid-template-columns: 1fr; gap: 8px; }
+  .course p { grid-column: auto; }
+  .course .open { justify-self: start; margin-top: 6px; }
+  .jobs li.job { grid-template-columns: 1fr; }
+  .community { grid-template-columns: 1fr; }
+  .now div { grid-template-columns: 1fr; gap: 2px; }
+  .hero-cta .btn { flex: 1 1 100%; justify-content: center; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top"><span class="en">Qais Eyad</span><span class="ar">قيس إياد</span></a>
+    <nav class="nav" id="nav" aria-label="Main">
+          <a href="#courses"><span class="en">Courses</span><span class="ar">الكورسات</span></a>
+      <a href="#roadmaps"><span class="en">Roadmaps</span><span class="ar">المسارات</span></a>
+      <a href="#training"><span class="en">Private training</span><span class="ar">تدريب خاص</span></a>
+      <a href="#consulting"><span class="en">Consulting</span><span class="ar">الاستشارات</span></a>
+      <a href="#experience"><span class="en">Experience</span><span class="ar">الخبرات</span></a>
+    </nav>
+    <div class="top-actions">
+      <button class="lang" id="langBtn" type="button" aria-label="Switch language"><span class="en" lang="ar">عربي</span><span class="ar" lang="en">English</span></button>
+      <a class="btn btn-wa" data-wa-en="Hi Qais, I found you through your website." data-wa-ar="مرحبا قيس، وصلتلك من خلال موقعك." href="https://wa.me/962782954759" target="_blank" rel="noopener">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="#i-wa"/></svg>
+        <span><span class="en">WhatsApp</span><span class="ar">واتساب</span></span>
+      </a>
+      <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="nav"><span class="en">Menu</span><span class="ar">القائمة</span></button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <h1 class="hero-name"><span class="en">Qais<br>Eyad</span><span class="ar">قيس<br>إياد</span></h1>
+      <p class="hero-lede">
+        <span class="en">IT Security Officer based in Amman, specialized in SOC and digital forensics. I also teach cybersecurity in Arabic through free YouTube courses, the SOC 101 course and private certification training.</span><span class="ar">مسؤول أمن معلومات في عمّان، متخصص في الـ SOC والتحقيق الجنائي الرقمي. بقدّم كورسات أمن سيبراني بالعربي، منها مجانية على يوتيوب، وكورس SOC 101، وتدريب خاص للشهادات.</span>
+      </p>
+      <div class="hero-cta">
+        <a class="btn btn-ink" href="#courses"><span class="en">Browse courses</span><span class="ar">تصفّح الكورسات</span></a>
+        <a class="btn btn-line" href="#training"><span class="en">Book private training</span><span class="ar">احجز تدريب خاص</span></a>
+      </div>
+      <div class="socials">
+        <a href="https://www.youtube.com/@Qais_Eyad" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-yt"/></svg>YouTube</a>
+        <a href="https://www.linkedin.com/in/qais-eyad" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-in"/></svg>LinkedIn</a>
+        <a href="https://www.instagram.com/_rootsec" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-ig"/></svg>Instagram</a>
+        <a href="https://www.tiktok.com/@qais.eyad22" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-tt"/></svg>TikTok</a>
+        <a href="https://discord.com/invite/KKXyRwbq94" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-dc"/></svg>Discord</a>
+      </div>
+    </div>
+
+    <dl class="now">
+      <div>
+        <dt><span class="en">Role</span><span class="ar">العمل الحالي</span></dt>
+        <dd><span class="pulse" aria-hidden="true"></span><span class="en">IT Security Officer at ITG</span><span class="ar">IT Security Officer في ITG</span></dd>
+      </div>
+      <div>
+        <dt><span class="en">Latest talk</span><span class="ar">آخر محاضرة</span></dt>
+        <dd><a href="#achievements"><span class="en">Tusk InfoStealer deep-dive, BSides Amman 2026</span><span class="ar">تحليل Tusk InfoStealer في BSides Amman 2026</span></a></dd>
+      </div>
+      <div>
+        <dt><span class="en">Focus</span><span class="ar">التخصص</span></dt>
+        <dd><span class="en">SOC, DFIR, threat detection</span><span class="ar">SOC، DFIR، كشف التهديدات</span></dd>
+      </div>
+      <div>
+        <dt><span class="en">Available for</span><span class="ar">متاح لـ</span></dt>
+        <dd><a href="#training"><span class="en">Private training</span><span class="ar">التدريب الخاص</span></a><span class="en"> and </span><span class="ar"> و</span><a href="#consulting"><span class="en">consulting</span><span class="ar">الاستشارات</span></a></dd>
+      </div>
+    </dl>
+  </div>
+</section>
+
+<!-- COURSES -->
+<section class="section" id="courses">
+  <div class="wrap">
+    <div class="head">
+      <h2><span class="en">Courses</span><span class="ar">الكورسات</span></h2>
+      <p><span class="en">All courses are in Arabic and start from the basics.</span><span class="ar">كل الكورسات باللغة العربية وبتبدأ من الأساسيات.</span></p>
+    </div>
+
+    <div class="filters" role="group" aria-label="Filter courses">
+      <button type="button" data-filter="all" aria-pressed="true"><span class="en">All</span><span class="ar">الكل</span></button>
+      <button type="button" data-filter="free" aria-pressed="false"><span class="en">Free</span><span class="ar">مجاني</span></button>
+      <button type="button" data-filter="paid" aria-pressed="false"><span class="en">Paid</span><span class="ar">مدفوع</span></button>
+    </div>
+
+    <div class="catalog">
+      <article class="course" data-kind="paid">
+        <span class="kind paid"><span class="en">Paid</span><span class="ar">مدفوع</span></span>
+        <div>
+          <h3>SOC 101</h3>
+          <div class="meta"><span class="en">20 hours, lifetime access</span><span class="ar">20 ساعة، وصول مدى الحياة</span></div>
+        </div>
+        <p><span class="en">Covers defense frameworks, networking, Windows fundamentals and SIEM for anyone starting as a SOC analyst.</span><span class="ar">بيغطي أطر الدفاع والشبكات وأساسيات ويندوز والـ SIEM، لأي حد بدو يبدأ كمحلل SOC.</span></p>
+        <button class="btn btn-ink open" type="button" data-detail="d-soc101"><span class="en">View course</span><span class="ar">تفاصيل الكورس</span></button>
+      </article>
+
+      <article class="course" data-kind="free">
+        <span class="kind free"><span class="en">Free</span><span class="ar">مجاني</span></span>
+        <div>
+          <h3>Security 99</h3>
+          <div class="meta"><span class="en">13 episodes on YouTube</span><span class="ar">13 حلقة على يوتيوب</span></div>
+        </div>
+        <p><span class="en">Takes a complete beginner from zero to a solid intermediate level in cybersecurity.</span><span class="ar">بياخذ أي طالب من الصفر لحد مستوى متوسط قوي بالأمن السيبراني.</span></p>
+        <button class="btn btn-line open" type="button" data-detail="d-sec99"><span class="en">View course</span><span class="ar">تفاصيل الكورس</span></button>
+      </article>
+
+      <article class="course" data-kind="free">
+        <span class="kind free"><span class="en">Free</span><span class="ar">مجاني</span></span>
+        <div>
+          <h3>SOC Home Lab</h3>
+          <div class="meta"><span class="en">8 episodes on YouTube</span><span class="ar">8 حلقات على يوتيوب</span></div>
+        </div>
+        <p><span class="en">Build a real SOC lab from scratch, run attacks against it and catch them in the SIEM.</span><span class="ar">ابنِ لاب SOC حقيقي من الصفر، نفّذ عليه هجمات واكشفها بالـ SIEM.</span></p>
+        <button class="btn btn-line open" type="button" data-detail="d-homelab"><span class="en">View course</span><span class="ar">تفاصيل الكورس</span></button>
+      </article>
+
+      <article class="course" data-kind="free">
+        <span class="kind free"><span class="en">Free</span><span class="ar">مجاني</span></span>
+        <div>
+          <h3>CyberDefenders Labs</h3>
+          <div class="meta"><span class="en">18 episodes on YouTube</span><span class="ar">18 حلقة على يوتيوب</span></div>
+        </div>
+        <p><span class="en">Step-by-step solutions to SOC and DFIR labs, explained from zero.</span><span class="ar">حلول خطوة بخطوة للابات SOC و DFIR، مشروحة من الصفر.</span></p>
+        <button class="btn btn-line open" type="button" data-detail="d-cd"><span class="en">View course</span><span class="ar">تفاصيل الكورس</span></button>
+      </article>
+
+      <article class="course" data-kind="free">
+        <span class="kind free"><span class="en">Free</span><span class="ar">مجاني</span></span>
+        <div>
+          <h3>Memory Forensics</h3>
+          <div class="meta"><span class="en">6 episodes on YouTube</span><span class="ar">6 حلقات على يوتيوب</span></div>
+        </div>
+        <p><span class="en">A short course on investigating memory dumps with Volatility, starting from scratch.</span><span class="ar">كورس قصير بعلّمك تحقق بالـ Memory dumps باستخدام Volatility من الصفر.</span></p>
+        <button class="btn btn-line open" type="button" data-detail="d-mem"><span class="en">View course</span><span class="ar">تفاصيل الكورس</span></button>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ROADMAPS -->
+<section class="section alt" id="roadmaps">
+  <div class="wrap">
+    <div class="head">
+      <h2><span class="en">Roadmaps</span><span class="ar">المسارات</span></h2>
+      <p><span class="en">Videos that show where to start and what to learn, step by step.</span><span class="ar">فيديوهات بتوضحلك من وين تبدأ وشو تتعلم خطوة بخطوة.</span></p>
+    </div>
+    <div class="roads">
+      <a class="road" href="https://youtu.be/pK_gYwaZUUE" target="_blank" rel="noopener">
+        <div class="thumb">
+          <img src="https://i.ytimg.com/vi/pK_gYwaZUUE/hqdefault.jpg" alt="" loading="lazy" onerror="this.remove()">
+          <span class="play"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4v16l13-8z"/></svg><span class="en">Watch on YouTube</span><span class="ar">شاهد على يوتيوب</span></span>
+        </div>
+        <h3>SOC Roadmap</h3>
+        <p><span class="en">The skills, tools and certifications you need for your first SOC job, in order.</span><span class="ar">المهارات والأدوات والشهادات اللي بتحتاجها لأول وظيفة SOC، بالترتيب.</span></p>
+      </a>
+      <a class="road" href="https://youtu.be/Dg3XcohFVHA" target="_blank" rel="noopener">
+        <div class="thumb">
+          <img src="https://i.ytimg.com/vi/Dg3XcohFVHA/hqdefault.jpg" alt="" loading="lazy" onerror="this.remove()">
+          <span class="play"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4v16l13-8z"/></svg><span class="en">Watch on YouTube</span><span class="ar">شاهد على يوتيوب</span></span>
+        </div>
+        <h3>Cyber Security Roadmap</h3>
+        <p><span class="en">An overview of the cybersecurity field and its main career paths.</span><span class="ar">نظرة عامة على مجال الأمن السيبراني وأهم التخصصات فيه.</span></p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- PRIVATE TRAINING -->
+<section class="section" id="training">
+  <div class="wrap">
+    <div class="head">
+      <h2><span class="en">Private training</span><span class="ar">التدريب الخاص</span></h2>
+      <p><span class="en">One-on-one or small-group training. The content depends on your level, and we can start from zero.</span><span class="ar">تدريب فردي أو لمجموعات صغيرة. المحتوى حسب مستواك، وبنقدر نبدأ من الصفر.</span></p>
+    </div>
+    <div class="train-grid">
+      <button class="train" type="button" data-detail="d-ceh">
+        <span class="issuer">EC-Council</span>
+        <h3>CEH</h3>
+        <p><span class="en">Certified Ethical Hacker</span><span class="ar">الهكر الأخلاقي المعتمد</span></p>
+        <span class="more"><span class="en">See details</span><span class="ar">التفاصيل</span></span>
+      </button>
+      <button class="train" type="button" data-detail="d-csa">
+        <span class="issuer">EC-Council</span>
+        <h3>CSA</h3>
+        <p><span class="en">Certified SOC Analyst</span><span class="ar">محلل SOC معتمد</span></p>
+        <span class="more"><span class="en">See details</span><span class="ar">التفاصيل</span></span>
+      </button>
+      <button class="train" type="button" data-detail="d-ecir">
+        <span class="issuer">INE</span>
+        <h3>eCIR</h3>
+        <p><span class="en">Certified Incident Responder</span><span class="ar">مستجيب حوادث معتمد</span></p>
+        <span class="more"><span class="en">See details</span><span class="ar">التفاصيل</span></span>
+      </button>
+      <button class="train" type="button" data-detail="d-ecthp">
+        <span class="issuer">INE</span>
+        <h3>eCTHP</h3>
+        <p><span class="en">Certified Threat Hunting Professional</span><span class="ar">صائد تهديدات محترف معتمد</span></p>
+        <span class="more"><span class="en">See details</span><span class="ar">التفاصيل</span></span>
+      </button>
+      <button class="train" type="button" data-detail="d-fund">
+        <span class="issuer"><span class="en">Foundation</span><span class="ar">تأسيس</span></span>
+        <h3>Cyber Security Fundamentals</h3>
+        <p><span class="en">The groundwork before any certification</span><span class="ar">الأساس قبل أي شهادة</span></p>
+        <span class="more"><span class="en">See details</span><span class="ar">التفاصيل</span></span>
+      </button>
+      <button class="train" type="button" data-detail="d-dfir">
+        <span class="issuer">DFIR</span>
+        <h3>Digital Forensics</h3>
+        <p><span class="en">Disk, memory and Windows artifact investigation</span><span class="ar">تحقيق بالأقراص والذاكرة وأدلة ويندوز</span></p>
+        <span class="more"><span class="en">See details</span><span class="ar">التفاصيل</span></span>
+      </button>
+    </div>
+    <p class="train-note"><span class="en">Timing, format (online or in person) and price are agreed on WhatsApp.</span><span class="ar">المواعيد وطريقة التدريب (أونلاين أو حضوري) والسعر بنتفق عليها على الواتساب.</span></p>
+  </div>
+</section>
+
+<!-- CONSULTING -->
+<section class="section alt" id="consulting">
+  <div class="wrap">
+    <div class="head">
+      <h2><span class="en">Consulting</span><span class="ar">الاستشارات</span></h2>
+      <p><span class="en">Security consulting for companies and individuals.</span><span class="ar">استشارات أمنية للشركات والأفراد.</span></p>
+    </div>
+    <div class="consult">
+      <ul>
+        <li>
+          <h3><span class="en">SOC and SIEM setup</span><span class="ar">بناء الـ SOC والـ SIEM</span></h3>
+          <p><span class="en">Choosing log sources, writing detection rules and tuning alerts.</span><span class="ar">اختيار مصادر السجلات، كتابة قواعد الكشف، وضبط التنبيهات.</span></p>
+        </li>
+        <li>
+          <h3><span class="en">Incident response advisory</span><span class="ar">استشارات الاستجابة للحوادث</span></h3>
+          <p><span class="en">Help investigating a suspected breach, collecting evidence and containing it.</span><span class="ar">مساعدة بالتحقيق باختراق مشتبه فيه، جمع الأدلة، والاحتواء.</span></p>
+        </li>
+        <li>
+          <h3><span class="en">Security posture review</span><span class="ar">مراجعة الوضع الأمني</span></h3>
+          <p><span class="en">Reviewing your current security controls and what needs fixing first.</span><span class="ar">مراجعة الضوابط الأمنية الحالية وتحديد شو لازم ينصلح أول.</span></p>
+        </li>
+        <li>
+          <h3><span class="en">Career guidance</span><span class="ar">التوجيه المهني</span></h3>
+          <p><span class="en">CV review, interview preparation and choosing the right certification.</span><span class="ar">مراجعة السيرة الذاتية، التحضير للمقابلات، واختيار الشهادة المناسبة.</span></p>
+        </li>
+      </ul>
+      <div class="consult-card">
+        <h3><span class="en">Book a consultation</span><span class="ar">احجز استشارة</span></h3>
+        <p><span class="en">Send me a message on WhatsApp with what you need and we will set a time.</span><span class="ar">ابعتلي على الواتساب شو بتحتاج ومنحدد موعد.</span></p>
+        <a class="btn btn-wa" data-wa-en="Hi Qais, I'd like to book a consultation." data-wa-ar="مرحبا قيس، بدي أحجز استشارة." href="https://wa.me/962782954759" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="#i-wa"/></svg>
+          <span class="en">Message on WhatsApp</span><span class="ar">راسلني على واتساب</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="section" id="experience">
+  <div class="wrap">
+    <div class="head">
+      <h2><span class="en">Experience</span><span class="ar">الخبرات</span></h2>
+    </div>
+    <ol class="jobs">
+      <li class="job">
+        <div class="when"><span class="en">Oct 2026 to present</span><span class="ar">أكتوبر 2026 حتى الآن</span><br><span class="tag"><span class="en">Current</span><span class="ar">حالياً</span></span></div>
+        <div>
+          <h3>IT Security Officer</h3>
+          <div class="org">ITG</div>
+          <ul>
+            <li><span class="en">Responsible for information security across ITG's infrastructure, from monitoring and incident handling to security controls and policy.</span><span class="ar">مسؤول عن أمن المعلومات على مستوى البنية التحتية لـ ITG، من المراقبة والتعامل مع الحوادث لحد الضوابط والسياسات الأمنية.</span></li>
+          </ul>
+        </div>
+      </li>
+      <li class="job">
+        <div class="when"><span class="en">Aug 2025 to Oct 2026</span><span class="ar">آب 2025 حتى تشرين الأول 2026</span></div>
+        <div>
+          <h3>Information Security Analyst</h3>
+          <div class="org"><span class="en">SMT Group, SOC operations</span><span class="ar">SMT Group، عمليات الـ SOC</span></div>
+          <ul>
+            <li><span class="en">Analyzed logs across network, endpoint and server layers to surface indicators of compromise early.</span><span class="ar">تحليل السجلات على مستوى الشبكة والأجهزة والسيرفرات لاكتشاف مؤشرات الاختراق بوقت مبكر.</span></li>
+            <li><span class="en">Monitored and triaged threat events in real time on IBM QRadar.</span><span class="ar">مراقبة وفرز التهديدات بشكل لحظي على IBM QRadar.</span></li>
+            <li><span class="en">Built SOAR playbooks that automated incident response steps and cut response time.</span><span class="ar">بناء SOAR playbooks لأتمتة خطوات الاستجابة وتقليل وقتها.</span></li>
+            <li><span class="en">Investigated EDR alerts for suspicious processes, privilege escalation and lateral movement.</span><span class="ar">التحقيق بتنبيهات الـ EDR للعمليات المشبوهة ورفع الصلاحيات والتحرك الجانبي.</span></li>
+            <li><span class="en">Handled incidents end to end, from detection to the post-incident report.</span><span class="ar">إدارة الحوادث من الكشف لحد تقرير ما بعد الحادثة.</span></li>
+          </ul>
+        </div>
+      </li>
+      <li class="job">
+        <div class="when"><span class="en">Jan 2025 to Jul 2025</span><span class="ar">كانون الثاني 2025 حتى تموز 2025</span></div>
+        <div>
+          <h3>Information Security Engineer Intern</h3>
+          <div class="org"><span class="en">GN TEQ, DevSecOps and cloud security</span><span class="ar">GN TEQ، DevSecOps وأمن السحابة</span></div>
+          <ul>
+            <li><span class="en">Hardened CI/CD pipelines and container images through systematic vulnerability scanning.</span><span class="ar">تقوية الـ CI/CD pipelines وصور الحاويات من خلال فحص ثغرات منهجي.</span></li>
+            <li><span class="en">Ran penetration tests on production systems and followed critical findings through to remediation.</span><span class="ar">تنفيذ اختبارات اختراق على أنظمة الإنتاج ومتابعة الثغرات الحرجة لحد إصلاحها.</span></li>
+            <li><span class="en">Applied Zero Trust and least-privilege access across containerized workloads.</span><span class="ar">تطبيق مبادئ Zero Trust وأقل صلاحيات ممكنة على بيئات الحاويات.</span></li>
+            <li><span class="en">Designed and delivered security awareness training for staff.</span><span class="ar">تصميم وتقديم تدريبات توعية أمنية للموظفين.</span></li>
+          </ul>
+        </div>
+      </li>
+      <li class="job">
+        <div class="when"><span class="en">Sep 2024 to Jan 2025</span><span class="ar">أيلول 2024 حتى كانون الثاني 2025</span></div>
+        <div>
+          <h3>Cybersecurity &amp; Data Privacy Associate</h3>
+          <div class="org"><span class="en">AIM, compliance and data protection</span><span class="ar">AIM، الامتثال وحماية البيانات</span></div>
+          <ul>
+            <li><span class="en">Supported client compliance with Jordan's Personal Data Protection Law and ISO 27001.</span><span class="ar">دعم امتثال العملاء لقانون حماية البيانات الشخصية الأردني ومعيار ISO 27001.</span></li>
+            <li><span class="en">Advised on data protection clauses in contracts and business agreements.</span><span class="ar">تقديم استشارات حول بنود حماية البيانات في العقود والاتفاقيات.</span></li>
+            <li><span class="en">Turned regulatory requirements into concrete security controls.</span><span class="ar">تحويل المتطلبات التنظيمية لضوابط أمنية قابلة للتطبيق.</span></li>
+          </ul>
+        </div>
+      </li>
+    </ol>
+    <p class="edu"><span class="en"><strong>B.Sc. in Cyber Security</strong>, Hashemite University, 2025. Graduated with a Very Good GPA.</span><span class="ar"><strong>بكالوريوس أمن سيبراني</strong>، الجامعة الهاشمية، 2025، بتقدير جيد جداً.</span></p>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section class="section alt" id="certifications">
+  <div class="wrap">
+    <div class="head">
+      <h2><span class="en">Certifications</span><span class="ar">الشهادات</span></h2>
+    </div>
+    <ul class="certs">
+      <li><strong>Certified SOC Analyst (CSA)</strong><span><span class="en">EC-Council, Mar 2026</span><span class="ar">EC-Council، آذار 2026</span></span></li>
+      <li><strong>Certified Red Team Analyst (CRTA)</strong><span><span class="en">Pentester Academy, Apr 2025</span><span class="ar">Pentester Academy، نيسان 2025</span></span></li>
+      <li><strong>Fortinet Certified Fundamentals (FCF)</strong><span><span class="en">Fortinet, Aug 2024</span><span class="ar">Fortinet، آب 2024</span></span></li>
+      <li><strong>Digital Forensics Essentials (DFE)</strong><span><span class="en">EC-Council, Feb 2024</span><span class="ar">EC-Council، شباط 2024</span></span></li>
+      <li><strong>SOC Level 1</strong><span>TryHackMe</span></li>
+      <li><strong>Cisco Certified Network Associate (CCNA)</strong><span><span class="en">Cisco, Aug 2022</span><span class="ar">Cisco، آب 2022</span></span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section class="section" id="achievements">
+  <div class="wrap">
+    <div class="head">
+      <h2><span class="en">Competitions and recognition</span><span class="ar">المسابقات والإنجازات</span></h2>
+    </div>
+    <div class="wins">
+      <article class="win">
+        <div class="duo">
+          <img src="bsides_stage.jpg" alt="Qais Eyad presenting at BSides Amman 2026, University of Jordan" loading="lazy">
+          <img src="bsides_speaker.jpg" alt="BSides Amman 2026 speaker card: Tusk Info Stealer Deepdive" loading="lazy">
+        </div>
+        <div class="result"><span class="en">Speaker</span><span class="ar">متحدث</span></div>
+        <div class="event"><span class="en">BSides Amman 2026, University of Jordan</span><span class="ar">BSides Amman 2026، الجامعة الأردنية</span></div>
+        <p><span class="en">Technical talk on the Tusk InfoStealer campaign, mapping the attack to the Cyber Kill Chain from initial access to data exfiltration, with IoCs and detection logic for SOC and DFIR teams.</span><span class="ar">محاضرة تقنية عن حملة Tusk InfoStealer، ربطت فيها مراحل الهجوم بالـ Cyber Kill Chain من الوصول الأولي لحد تسريب البيانات، مع الـ IoCs ومنطق الكشف لفرق الـ SOC والـ DFIR.</span></p>
+      </article>
+      <article class="win">
+        <img src="ncsc2025.jpg" alt="NCSC 2025 competition" loading="lazy">
+        <div class="result"><span class="en">Top 10</span><span class="ar">أفضل 10</span></div>
+        <div class="event">NCSC 2025</div>
+        <p><span class="en">Qualified for the top 10 in the National Cyber Security Center competition.</span><span class="ar">التأهل لأفضل 10 في مسابقة المركز الوطني للأمن السيبراني.</span></p>
+      </article>
+      <article class="win">
+        <img src="ncsc_ctf.jpg" alt="NCSC final CTF" loading="lazy">
+        <div class="result"><span class="en">5th place</span><span class="ar">المركز الخامس</span></div>
+        <div class="event">NCSC Final CTF</div>
+        <p><span class="en">Finished 5th in the final after taking 2nd in the pre-final round with team Cyber-eto.</span><span class="ar">المركز الخامس بالنهائي بعد المركز الثاني بالتصفيات مع فريق Cyber-eto.</span></p>
+      </article>
+      <article class="win">
+        <img src="blackhat_mea.jpg" alt="Black Hat MEA CTF 2024" loading="lazy">
+        <div class="result"><span class="en">Rank 54</span><span class="ar">المرتبة 54</span></div>
+        <div class="event">Black Hat MEA CTF 2024</div>
+        <p><span class="en">Qualified for the final round of one of the largest CTFs in the Middle East and Africa.</span><span class="ar">التأهل للنهائي في واحدة من أكبر مسابقات CTF بالشرق الأوسط وأفريقيا.</span></p>
+      </article>
+      <article class="win">
+        <img src="security_day.jpg" alt="RLCTF finals and Security Day" loading="lazy">
+        <div class="result"><span class="en">4th place</span><span class="ar">المركز الرابع</span></div>
+        <div class="event"><span class="en">RLCTF Finals, JUST</span><span class="ar">نهائيات RLCTF، جامعة العلوم والتكنولوجيا</span></div>
+        <p><span class="en">Also presented a live DFIR scenario at Security Day, Hashemite University.</span><span class="ar">وقدّمت سيناريو DFIR مباشر في يوم الأمن بالجامعة الهاشمية.</span></p>
+      </article>
+      <article class="win">
+        <img src="dot_summit.jpg" alt="DOT Cyber Summit" loading="lazy">
+        <div class="result"><span class="en">Presenter</span><span class="ar">عرض مشروع</span></div>
+        <div class="event"><span class="en">DOT Cyber Summit, NCSC Jordan</span><span class="ar">قمة DOT Cyber، المركز الوطني للأمن السيبراني</span></div>
+        <p><span class="en">Presented a malware analysis framework and was interviewed live on AlMamlaka TV about the role of national cybersecurity centers.</span><span class="ar">عرض إطار عمل لتحليل البرمجيات الخبيثة، ومقابلة مباشرة على قناة المملكة عن دور المراكز الوطنية للأمن السيبراني.</span></p>
+      </article>
+      <article class="win">
+        <img src="itsaf_petra.jpg" alt="ITSAF competition, University of Petra" loading="lazy">
+        <div class="result"><span class="en">Finalist</span><span class="ar">التأهل للنهائي</span></div>
+        <div class="event"><span class="en">ITSAF, University of Petra</span><span class="ar">ITSAF، جامعة البترا</span></div>
+        <p><span class="en">Reached the finals with a project on forensics-driven malware detection.</span><span class="ar">الوصول للنهائي بمشروع عن كشف البرمجيات الخبيثة بالتحليل الجنائي.</span></p>
+      </article>
+      <article class="win">
+        <img src="falcon_project.jpg" alt="Falcon Network Analyzer graduation project" loading="lazy">
+        <div class="result">Falcon</div>
+        <div class="event"><span class="en">Graduation project</span><span class="ar">مشروع التخرج</span></div>
+        <p><span class="en">A network analyzer that uses machine learning to flag threats in live traffic.</span><span class="ar">محلل شبكات بيستخدم تعلّم الآلة لكشف التهديدات بالترافيك المباشر.</span></p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- COMMUNITY -->
+<section class="section alt" id="community">
+  <div class="wrap community">
+    <div>
+      <h2><span class="en">Join the community</span><span class="ar">انضم للمجتمع</span></h2>
+      <p><span class="en">Ask questions, share your writeups and get updates on new courses.</span><span class="ar">اسأل، شارك حلولك، وتابع آخر الكورسات.</span></p>
+    </div>
+    <div class="community-btns">
+      <a class="btn btn-discord" href="https://discord.com/invite/KKXyRwbq94" target="_blank" rel="noopener">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="#i-dc"/></svg>
+        <span class="en">Discord server</span><span class="ar">سيرفر ديسكورد</span>
+      </a>
+      <a class="btn btn-wa" href="https://chat.whatsapp.com/FtsyHXh8pLW1TLMzGcPEUI" target="_blank" rel="noopener">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="#i-wa"/></svg>
+        <span class="en">WhatsApp group</span><span class="ar">جروب الواتساب</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span><span class="en">© 2026 Qais Eyad, Amman, Jordan</span><span class="ar">© 2026 قيس إياد، عمّان، الأردن</span></span>
+    <nav aria-label="Social">
+      <a href="https://www.linkedin.com/in/qais-eyad" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://www.youtube.com/@Qais_Eyad" target="_blank" rel="noopener">YouTube</a>
+      <a href="https://discord.com/invite/KKXyRwbq94" target="_blank" rel="noopener">Discord</a>
+      <a href="mailto:qays4738@gmail.com">Email</a>
+    </nav>
+  </div>
+</footer>
+
+<!-- ============ DETAIL SHEETS ============ -->
+<dialog id="sheet" aria-labelledby="sheetTitle">
+  <button class="sheet-close" type="button" data-close aria-label="Close">×</button>
+  <div class="sheet" id="sheetBody"></div>
+</dialog>
+
+<template id="d-soc101">
+  <span class="kind paid"><span class="en">Paid course</span><span class="ar">كورس مدفوع</span></span>
+  <h3 data-title>SOC 101</h3>
+  <div class="facts"><span><span class="en">20 hours</span><span class="ar">20 ساعة</span></span><span><span class="en">Lifetime access</span><span class="ar">وصول مدى الحياة</span></span><span><span class="en">Arabic</span><span class="ar">بالعربي</span></span></div>
+  <p><span class="en">A full course for anyone who wants to work as a SOC analyst. It starts from the basics and goes up to investigating alerts on a SIEM.</span><span class="ar">كورس كامل لأي حد بدو يشتغل محلل SOC. بيبدأ من الأساسيات ولحد التحقيق بالتنبيهات على الـ SIEM.</span></p>
+  <h4><span class="en">Course content</span><span class="ar">محتوى الكورس</span></h4>
+  <ol>
+    <li><span class="en">Introduction</span><span class="ar">مقدمة</span></li>
+    <li><span class="en">Cyber defense frameworks</span><span class="ar">أطر الدفاع السيبراني</span></li>
+    <li><span class="en">Network fundamentals</span><span class="ar">أساسيات الشبكات</span></li>
+    <li><span class="en">Windows fundamentals</span><span class="ar">أساسيات ويندوز</span></li>
+    <li><span class="en">SIEM overview</span><span class="ar">نظرة عامة على الـ SIEM</span></li>
+  </ol>
+  <p class="price-line"><span class="en">Price: <strong>15 JOD</strong>, with lifetime access to the course.</span><span class="ar">السعر: <strong>15 دينار أردني</strong>، مع صلاحية وصول للكورس مدى الحياة.</span></p>
+  <div class="actions">
+    <a class="btn btn-wa" data-wa-en="Hi Qais, I'd like to buy the SOC 101 course." data-wa-ar="مرحبا قيس، بدي أشتري كورس SOC 101." href="https://wa.me/962782954759" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="#i-wa"/></svg><span class="en">Buy now</span><span class="ar">اشترِ الآن</span></a>
+  </div>
+  <p class="fine"><span class="en">Clicking Buy opens a WhatsApp chat with me to complete the payment and get the course.</span><span class="ar">بس تكبس شراء بتنفتح محادثة واتساب معي لإتمام الدفع واستلام الكورس.</span></p>
+</template>
+<template id="d-sec99">
+  <span class="kind free"><span class="en">Free course</span><span class="ar">كورس مجاني</span></span>
+  <h3 data-title>Security 99</h3>
+  <div class="facts"><span><span class="en">13 episodes</span><span class="ar">13 حلقة</span></span><span><span class="en">Beginner to intermediate</span><span class="ar">من مبتدئ لمتوسط</span></span><span>YouTube</span></div>
+  <p><span class="en">Security 99 takes students from zero to an intermediate level in cybersecurity. Watch the episodes in order.</span><span class="ar">كورس Security 99 بيأسس الطالب من الصفر لحد مستوى متوسط بالأمن السيبراني. تابع الحلقات بالترتيب.</span></p>
+  <div class="actions">
+    <a class="btn btn-ink" href="https://youtube.com/playlist?list=PLsYbzhq9m_LVyC15wFfZJacX6M0_qRQWi" target="_blank" rel="noopener"><span class="en">Watch on YouTube</span><span class="ar">شاهد على يوتيوب</span></a>
+  </div>
+</template>
+<template id="d-homelab">
+  <span class="kind free"><span class="en">Free course</span><span class="ar">كورس مجاني</span></span>
+  <h3 data-title>SOC Home Lab</h3>
+  <div class="facts"><span><span class="en">8 episodes</span><span class="ar">8 حلقات</span></span><span><span class="en">Hands-on</span><span class="ar">عملي</span></span><span>YouTube</span></div>
+  <p><span class="en">Build a real SOC lab from scratch, run attacks on it and detect them using a SIEM.</span><span class="ar">ابنِ لاب SOC حقيقي من الصفر، نفّذ عليه هجمات واكشفها باستخدام الـ SIEM.</span></p>
+  <div class="actions">
+    <a class="btn btn-ink" href="https://youtube.com/playlist?list=PLsYbzhq9m_LXE0o1jQwl5--fbn_2EalRD" target="_blank" rel="noopener"><span class="en">Watch on YouTube</span><span class="ar">شاهد على يوتيوب</span></a>
+  </div>
+</template>
+<template id="d-cd">
+  <span class="kind free"><span class="en">Free course</span><span class="ar">كورس مجاني</span></span>
+  <h3 data-title>CyberDefenders Labs</h3>
+  <div class="facts"><span><span class="en">18 episodes</span><span class="ar">18 حلقة</span></span><span>SOC &amp; DFIR</span><span>YouTube</span></div>
+  <p><span class="en">Solutions for CyberDefenders SOC and DFIR labs, explained step by step from zero.</span><span class="ar">حل لابات SOC و DFIR من CyberDefenders، مشروحة خطوة بخطوة من الصفر.</span></p>
+  <div class="actions">
+    <a class="btn btn-ink" href="https://youtube.com/playlist?list=PLsYbzhq9m_LVW_HtZtd9B6i1fYrrrpSq_" target="_blank" rel="noopener"><span class="en">Watch on YouTube</span><span class="ar">شاهد على يوتيوب</span></a>
+  </div>
+</template>
+<template id="d-mem">
+  <span class="kind free"><span class="en">Free course</span><span class="ar">كورس مجاني</span></span>
+  <h3 data-title>Memory Forensics</h3>
+  <div class="facts"><span><span class="en">6 episodes</span><span class="ar">6 حلقات</span></span><span>Volatility</span><span>YouTube</span></div>
+  <p><span class="en">Learn memory forensics from zero using Volatility.</span><span class="ar">تعلّم تحليل الذاكرة (Memory Forensics) من الصفر باستخدام أداة Volatility.</span></p>
+  <div class="actions">
+    <a class="btn btn-ink" href="https://youtube.com/playlist?list=PLWh7yRI5hN0M" target="_blank" rel="noopener"><span class="en">Watch on YouTube</span><span class="ar">شاهد على يوتيوب</span></a>
+  </div>
+</template>
+<template id="d-ceh">
+  <span class="kind" style="background:var(--paper);color:var(--ink)"><span class="en">Private training</span><span class="ar">تدريب خاص</span></span>
+  <h3 data-title>EC-Council CEH</h3>
+  <p><span class="en">Preparation for the CEH exam. Covers reconnaissance, scanning, system hacking, web and network attacks, malware and social engineering, with practical labs.</span><span class="ar">تحضير لامتحان CEH. بيغطي جمع المعلومات، الفحص، اختراق الأنظمة، هجمات الويب والشبكات، البرمجيات الخبيثة والهندسة الاجتماعية، مع لابات عملية.</span></p>
+  <p><span class="en">Training is based on your level, and we can start from zero.</span><span class="ar">التدريب حسب مستواك، وبنقدر نبدأ من الصفر.</span></p>
+  <div class="actions">
+    <a class="btn btn-wa" data-wa-en="Hi Qais, I'm interested in private training for EC-Council CEH." data-wa-ar="مرحبا قيس، مهتم بتدريب خاص لـ شهادة CEH." href="https://wa.me/962782954759" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="#i-wa"/></svg><span class="en">Contact on WhatsApp</span><span class="ar">تواصل عبر الواتساب</span></a>
+  </div>
+</template>
+<template id="d-csa">
+  <span class="kind" style="background:var(--paper);color:var(--ink)"><span class="en">Private training</span><span class="ar">تدريب خاص</span></span>
+  <h3 data-title>EC-Council CSA</h3>
+  <p><span class="en">Preparation for the CSA exam. Covers SOC operations, log management, SIEM, alert triage, threat intelligence and incident response.</span><span class="ar">تحضير لامتحان CSA. بيغطي عمليات الـ SOC، إدارة السجلات، الـ SIEM، فرز التنبيهات، استخبارات التهديدات والاستجابة للحوادث.</span></p>
+  <p><span class="en">Training is based on your level, and we can start from zero.</span><span class="ar">التدريب حسب مستواك، وبنقدر نبدأ من الصفر.</span></p>
+  <div class="actions">
+    <a class="btn btn-wa" data-wa-en="Hi Qais, I'm interested in private training for EC-Council CSA." data-wa-ar="مرحبا قيس، مهتم بتدريب خاص لـ شهادة CSA." href="https://wa.me/962782954759" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="#i-wa"/></svg><span class="en">Contact on WhatsApp</span><span class="ar">تواصل عبر الواتساب</span></a>
+  </div>
+</template>
+<template id="d-ecir">
+  <span class="kind" style="background:var(--paper);color:var(--ink)"><span class="en">Private training</span><span class="ar">تدريب خاص</span></span>
+  <h3 data-title>INE eCIR</h3>
+  <p><span class="en">Preparation for the INE eCIR exam. Covers incident handling, traffic and log analysis, and investigating attacks using a SIEM.</span><span class="ar">تحضير لامتحان eCIR من INE. بيغطي التعامل مع الحوادث، تحليل الترافيك والسجلات، والتحقيق بالهجمات باستخدام الـ SIEM.</span></p>
+  <p><span class="en">Training is based on your level, and we can start from zero.</span><span class="ar">التدريب حسب مستواك، وبنقدر نبدأ من الصفر.</span></p>
+  <div class="actions">
+    <a class="btn btn-wa" data-wa-en="Hi Qais, I'm interested in private training for INE eCIR." data-wa-ar="مرحبا قيس، مهتم بتدريب خاص لـ شهادة eCIR." href="https://wa.me/962782954759" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="#i-wa"/></svg><span class="en">Contact on WhatsApp</span><span class="ar">تواصل عبر الواتساب</span></a>
+  </div>
+</template>
+<template id="d-ecthp">
+  <span class="kind" style="background:var(--paper);color:var(--ink)"><span class="en">Private training</span><span class="ar">تدريب خاص</span></span>
+  <h3 data-title>INE eCTHP</h3>
+  <p><span class="en">Preparation for the INE eCTHP exam. Covers threat hunting on network traffic and endpoints, building hypotheses and using threat intelligence.</span><span class="ar">تحضير لامتحان eCTHP من INE. بيغطي صيد التهديدات على الشبكة والأجهزة، بناء الفرضيات، واستخدام استخبارات التهديدات.</span></p>
+  <p><span class="en">Training is based on your level, and we can start from zero.</span><span class="ar">التدريب حسب مستواك، وبنقدر نبدأ من الصفر.</span></p>
+  <div class="actions">
+    <a class="btn btn-wa" data-wa-en="Hi Qais, I'm interested in private training for INE eCTHP." data-wa-ar="مرحبا قيس، مهتم بتدريب خاص لـ شهادة eCTHP." href="https://wa.me/962782954759" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="#i-wa"/></svg><span class="en">Contact on WhatsApp</span><span class="ar">تواصل عبر الواتساب</span></a>
+  </div>
+</template>
+<template id="d-fund">
+  <span class="kind" style="background:var(--paper);color:var(--ink)"><span class="en">Private training</span><span class="ar">تدريب خاص</span></span>
+  <h3 data-title>Cyber Security Fundamentals</h3>
+  <p><span class="en">For beginners. Covers networking, operating systems, and the basics of attacks and defense.</span><span class="ar">للمبتدئين. بيغطي الشبكات، أنظمة التشغيل، وأساسيات الهجوم والحماية.</span></p>
+  <p><span class="en">No prior background needed. We start from zero.</span><span class="ar">ما بتحتاج أي خلفية مسبقة، منبدأ من الصفر.</span></p>
+  <div class="actions">
+    <a class="btn btn-wa" data-wa-en="Hi Qais, I'm interested in private training for Cyber Security Fundamentals." data-wa-ar="مرحبا قيس، مهتم بتدريب خاص لـ أساسيات الأمن السيبراني." href="https://wa.me/962782954759" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="#i-wa"/></svg><span class="en">Contact on WhatsApp</span><span class="ar">تواصل عبر الواتساب</span></a>
+  </div>
+</template>
+<template id="d-dfir">
+  <span class="kind" style="background:var(--paper);color:var(--ink)"><span class="en">Private training</span><span class="ar">تدريب خاص</span></span>
+  <h3 data-title>Digital Forensics</h3>
+  <p><span class="en">Covers evidence collection, disk and file system analysis, Windows artifacts, memory analysis and building a timeline.</span><span class="ar">بيغطي جمع الأدلة، تحليل الأقراص وأنظمة الملفات، أدلة ويندوز، تحليل الذاكرة، وبناء الخط الزمني.</span></p>
+  <p><span class="en">Training is based on your level, and we can start from zero.</span><span class="ar">التدريب حسب مستواك، وبنقدر نبدأ من الصفر.</span></p>
+  <div class="actions">
+    <a class="btn btn-wa" data-wa-en="Hi Qais, I'm interested in private training for Digital Forensics." data-wa-ar="مرحبا قيس، مهتم بتدريب خاص لـ التحقيق الجنائي الرقمي." href="https://wa.me/962782954759" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="#i-wa"/></svg><span class="en">Contact on WhatsApp</span><span class="ar">تواصل عبر الواتساب</span></a>
+  </div>
+</template>
+
+<!-- ICONS -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-wa" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></symbol>
+  <symbol id="i-yt" viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.6V8.4l6.3 3.6-6.3 3.6Z"/></symbol>
+  <symbol id="i-in" viewBox="0 0 24 24"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z"/></symbol>
+  <symbol id="i-ig" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></symbol>
+  <symbol id="i-tt" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.32 6.32 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.76a4.85 4.85 0 0 1-1.01-.07Z"/></symbol>
+  <symbol id="i-dc" viewBox="0 0 24 24"><path d="M20.32 4.37A19.8 19.8 0 0 0 15.39 2.8a13.7 13.7 0 0 0-.63 1.3 18.4 18.4 0 0 0-5.5 0 12.7 12.7 0 0 0-.64-1.3 19.7 19.7 0 0 0-4.93 1.53C.57 9.04-.27 13.58.15 18.06a19.9 19.9 0 0 0 6.04 3.05c.49-.66.92-1.36 1.29-2.1a12.9 12.9 0 0 1-2.03-.97l.5-.39a14.2 14.2 0 0 0 12.1 0l.5.39c-.65.38-1.33.71-2.04.97.37.74.8 1.44 1.29 2.1a19.8 19.8 0 0 0 6.05-3.05c.5-5.19-.84-9.69-3.53-13.69ZM8.02 15.33c-1.18 0-2.16-1.09-2.16-2.42s.95-2.42 2.16-2.42c1.2 0 2.18 1.09 2.16 2.42 0 1.33-.96 2.42-2.16 2.42Zm7.97 0c-1.19 0-2.16-1.09-2.16-2.42s.95-2.42 2.16-2.42c1.2 0 2.18 1.09 2.16 2.42 0 1.33-.95 2.42-2.16 2.42Z"/></symbol>
+</svg>
+
+<script>
+(function () {
+  var WA = '962782954759';
+  var root = document.documentElement;
+
+  function store(k, v) { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; } }
+
+  function applyWa(scope) {
+    var lang = root.lang;
+    (scope || document).querySelectorAll('[data-wa-en]').forEach(function (a) {
+      var msg = a.getAttribute(lang === 'ar' ? 'data-wa-ar' : 'data-wa-en');
+      a.href = 'https://wa.me/' + WA + '?text=' + encodeURIComponent(msg);
+    });
+  }
+
+  function setLang(lang) {
+    root.lang = lang;
+    root.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    document.title = lang === 'ar' ? 'قيس إياد | مسؤول أمن معلومات، SOC و DFIR' : 'Qais Eyad | IT Security Officer, SOC & DFIR';
+    applyWa();
+    store('lang', lang);
+  }
+
+  var saved = store('lang');
+  setLang(saved === 'ar' || saved === 'en' ? saved : ((navigator.language || '').indexOf('ar') === 0 ? 'ar' : 'en'));
+
+  document.getElementById('langBtn').addEventListener('click', function () {
+    setLang(root.lang === 'ar' ? 'en' : 'ar');
+  });
+
+  // mobile menu
+  var nav = document.getElementById('nav'), menuBtn = document.getElementById('menuBtn');
+  menuBtn.addEventListener('click', function () {
+    var open = nav.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', open);
+  });
+  nav.addEventListener('click', function (e) {
+    if (e.target.closest('a')) { nav.classList.remove('open'); menuBtn.setAttribute('aria-expanded', 'false'); }
+  });
+
+  // course filter
+  var filterBtns = document.querySelectorAll('[data-filter]');
+  filterBtns.forEach(function (b) {
+    b.addEventListener('click', function () {
+      var f = b.getAttribute('data-filter');
+      filterBtns.forEach(function (x) { x.setAttribute('aria-pressed', x === b); });
+      document.querySelectorAll('.course').forEach(function (c) {
+        c.hidden = !(f === 'all' || c.getAttribute('data-kind') === f);
+      });
+    });
+  });
+
+  // detail sheets
+  var dlg = document.getElementById('sheet'), body = document.getElementById('sheetBody');
+  document.querySelectorAll('[data-detail]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var tpl = document.getElementById(btn.getAttribute('data-detail'));
+      body.innerHTML = '';
+      body.appendChild(tpl.content.cloneNode(true));
+      var t = body.querySelector('[data-title]'); if (t) t.id = 'sheetTitle';
+      applyWa(body);
+      if (typeof dlg.showModal === 'function') dlg.showModal(); else dlg.setAttribute('open', '');
+    });
+  });
+  dlg.addEventListener('click', function (e) {
+    if (e.target === dlg || e.target.hasAttribute('data-close')) dlg.close();
+  });
+})();
+</script>
+</body>
+</html>
